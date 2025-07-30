@@ -1,0 +1,384 @@
+// -------------------------------
+// SASS Variables
+// -------------------------------
+$main-bg: #35483d;                          // Main background color for the app
+$panel-bg: rgba(18,28,34,0.97);             // Panel background with transparency
+$panel-radius: 22px;                          // Panel border radius
+$panel-shadow: 0 8px 36px rgba(0,0,0,0.23); // Panel drop shadow
+
+$font-main: 'Roboto', Arial, sans-serif; 
+
+$btn-bg: #5d7a8a;                 // Button normal color
+$btn-hover: #46647a;              // Button hover color
+$btn-disabled: #888d92;           // Button disabled color
+
+$reset-bg: #14be6a;               // Restart button color
+$reset-hover: #128f54;            // Restart button hover
+
+// -------------------------------
+// SASS Mixins
+// -------------------------------
+
+// Reusable glass effect for cards or panels
+@mixin glass-card 
+{
+  background: rgba(3, 40, 125, 0.08);       // Subtle see-through blue    
+  box-shadow: 0 2px 12px rgba(96, 101, 255, 0.13); 
+  border-radius: 20px;                             
+  backdrop-filter: blur(6px);              
+}
+
+// Reusable mixin for "guesses remaining" counter box
+@mixin counter-box 
+{
+  background: rgba(255,255,255,0.12);         // Translucent white
+  border-radius: 12px;                       
+  padding: 10px 22px;                        
+  display: inline-block;                     
+  box-shadow: 0 1px 7px rgba(40,30,90,0.10);  
+  border: 1.5px solid #3a4b86;                
+}
+
+// -------------------------------
+// Main Page & Game Container
+// -------------------------------
+body 
+{
+  font-family: $font-main;     
+  background: $main-bg;                    
+  color: #fff;                             
+  margin: 0;
+  min-height: 100vh;                       
+}
+
+// Main game heading, centered and bold
+.main-heading 
+{
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 15px auto 10px auto;
+  font-weight: 700;
+
+  // Color highlight on hover for visual feedback
+  &:hover 
+  {
+      color: #adf2fd;
+      transition: all 0.3s ease-in-out;            
+  }
+}
+
+// Main game container with a glass effect
+#game-container 
+{
+  position: relative;
+  max-width: 1000px;
+  min-width: 700px;
+  margin: 24px auto 0 auto;
+  margin-top: 8px;                         
+  padding: 32px 38px;
+  background: $panel-bg;
+  border-radius: $panel-radius;
+  box-shadow: $panel-shadow;
+  @include glass-card;         // Use the glass card mixin
+}
+
+// -------------------------------
+// Animated Scene (background + characters)
+// -------------------------------
+#scene 
+{
+  position: relative;
+  width: 100%;
+  height: 480px;                          
+  margin-bottom: 28px;
+
+  // Background image styling
+  #bg-image 
+  {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 14px;
+  }
+
+  // Character images: runner and wolf
+  #wolf-image, #hero-image 
+  {
+      position: absolute;
+      bottom: 35px;
+      width: 180px;
+      height: 180px;
+      transition: left 0.65s cubic-bezier(0.4,1,0.4,1);
+      user-select: none;
+      pointer-events: none;
+  }
+
+  // Wolf starts left, faces right
+  #wolf-image 
+  {
+      left: 80px;
+      z-index: 4;
+      transform: scaleX(-1);         
+  }
+
+  // runner position (final left position)
+  #hero-image 
+  {
+      left: 100px;                   
+      z-index: 4;
+  }
+}
+
+// -------------------------------
+// Word & Hint Containers
+// -------------------------------
+
+// Shows the words (as underscores and revealed letters)
+#word-container 
+{
+  font-size: 2.5rem;
+  letter-spacing: 0.47em;
+  margin: 8px 0 6px 0;                 
+  text-align: center;
+  font-weight: 600;                  
+  color: #e7ebff;                  
+}
+
+// Shows the current hint, centered, bold, colored, above the keyboard
+#hint-container 
+{
+  text-align: center;
+  font-weight: bold;
+  color: #ff9d00;                     
+  font-size: 1.7rem;
+  margin: 20px 0 22px 0;              
+  letter-spacing: 0.04em;
+  word-break: break-word;             
+}
+
+// -------------------------------
+// Keyboard & Counter
+// -------------------------------
+
+// On-screen keyboard (A-Z)
+#keyboard 
+{
+  text-align: center;
+  margin-bottom: 18px;
+  .kb-btn 
+  {
+      display: inline-block;
+      background: $btn-bg;
+      color: #fff;
+      font-size: 1.35rem;
+      margin: 4px 7px 7px 0;
+      padding: 13px 24px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.22s;
+      font-weight: 500;
+      // Button hover
+      &:hover 
+      {
+          background: $btn-hover;
+      }
+      // Button disabled
+      &:disabled 
+      {
+          background: $btn-disabled;
+          cursor: not-allowed;
+      }
+  }
+}
+
+// "Guesses Remaining" counter box, above the restart button
+#guess-remaining 
+{
+  @include counter-box;        // Use the counter-box mixin
+  display: block;                        
+  width: max-content;                    
+  margin: 1% auto 0 auto;        
+  font-size: 1.35rem;
+  font-weight: bold;
+  color: #ecdeb6;                        
+  letter-spacing: 0.1em;
+  min-width: 150px;             
+}
+
+// -------------------------------
+// Message and Button
+// -------------------------------
+#message 
+{
+  text-align: center;
+  font-size: 1.18rem;
+  margin: 14px 0;
+  min-height: 32px;
+  font-weight: 700;
+  img 
+  {
+      vertical-align: middle;
+      margin-right: 8px;
+  }
+}
+
+// Restart game button
+#reset-btn 
+{
+  display: block;
+  margin: 22px auto 0 auto;
+  padding: 13px 34px;
+  font-size: 1.12rem;
+  border-radius: 7px;
+  background: $reset-bg;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+  // Hover style for button
+  &:hover
+   {
+      background: $reset-hover;
+  }
+}
+
+// Special Messages for Loss
+.big-warning 
+{
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #e74c3c;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 8px #fff4;
+}
+
+// Special Messages for Win
+.big-success 
+{
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #2ecc71;        // Green for Win
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 8px #fff4;
+}
+
+// Win and Lose Details
+.win-detail 
+{
+    color: #26d35c;    
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-align: center;
+}
+
+// Loose and Lose Details
+.lose-detail 
+{
+    color: #e74c3c;    
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-align: center;
+}
+
+// ---------- Tablet Styles ----------
+@media (max-width: 900px) 
+{
+  #game-container
+    {
+      max-width: 98vw;
+      min-width: 0;
+      padding: 14px 8px;
+  }
+  #scene 
+  {
+      height: 340px;
+      #bg-image { height: 340px; }
+      #wolf-image, #hero-image { width: 98px; height: 98px; bottom: 20px; }
+      #wolf-image { left: 18px; }
+      #hero-image { left: 390px; }
+  }
+  #word-container { font-size: 1.5rem; }
+  #hint-container { font-size: 1rem; }
+  #keyboard .kb-btn { font-size: 1rem; padding: 9px 11px; }
+}
+
+#guess-remaining 
+{
+    font-size: 1.1rem;           
+    min-width: 100px;
+    padding: 7px 12px;           
+    margin: 10px auto 8px auto; 
+  }
+
+// ---------- Latest Smartphone Styles ----------
+@media (max-width: 500px) 
+{
+  .main-heading 
+  {
+      font-size: 1.06rem;
+      margin: 8px 0 5px 0;
+  }
+  #game-container 
+  {
+      max-width: 100vw;
+      min-width: 0;
+      padding: 2vw 1vw;
+  }
+  #scene 
+  {
+      height: 135px;
+      #bg-image { height: 135px; }
+      #wolf-image, #hero-image { width: 36px; height: 36px; bottom: 3px; }
+      #wolf-image { left: 6px; }
+      #hero-image { left: 120px; }
+  }
+
+  #word-container 
+  {
+      font-size: 1.05rem;
+      letter-spacing: 0.13em;
+      margin: 6px 0 2px 0;
+  }
+
+  #hint-container 
+  {
+      font-size: 1rem;
+      margin: 0 0 13px 0;
+      color: #2bb3ff;   // Brighter blue for tiny screens
+  }
+  
+  #keyboard .kb-btn 
+  {
+      font-size: 0.62rem;
+      padding: 2.5px 4.5px;
+      margin: 1.5px 2px 2.5px 0;
+      border-radius: 4px;
+  }
+
+  #reset-btn 
+  {
+      font-size: 0.72rem;
+      padding: 6px 8px;
+      border-radius: 4px;
+      margin-top: 4px;
+  }
+
+  #message 
+  {
+      font-size: 0.82rem;
+      min-height: 14px;
+      img { width: 22px !important; margin-right: 3px; }
+  }
+
+  #guess-remaining 
+  {
+    font-size: 0.7rem;           
+    min-width: 80px;
+    padding: 4px 7px;             
+    margin: 8px auto 5px auto;  
+  }
+}

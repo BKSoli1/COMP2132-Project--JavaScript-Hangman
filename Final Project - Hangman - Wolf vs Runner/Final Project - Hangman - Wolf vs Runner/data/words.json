@@ -1,0 +1,45 @@
+[
+  { 
+    "word": "vancouver", "hint": "A beutifull city south west of the Canadan border"
+  },
+
+  { 
+    "word": "hangman",    "hint": "The classic word guessing game" 
+  },
+
+  { 
+    "word": "canada",     "hint": "A beutifull country in North America" 
+  },
+
+  { 
+    "word": "computer",   "hint": "A device used for programming and games"
+  },
+
+  { 
+    "word": "bcit",       "hint": "A technical institute in British Columbia" 
+  },
+
+  { 
+    "word": "python",     "hint": "A popular programming language named after a snake" 
+  },
+
+  { 
+    "word": "react",      "hint": "A popular JS library for building interfaces" 
+  },
+
+  { 
+    "word": "javascript", "hint": "A programming language for web development"
+  },
+
+  { 
+    "word": "html",       "hint": "The standard markup language for web pages" 
+  },
+
+  { 
+    "word": "css",        "hint": "A style sheet language used for describing the presentation of a document written in HTML or XML" 
+  },
+  
+  { 
+    "word": "spongebob",  "hint": "A famous cartoon character who lives in a pineapple under the sea" 
+  }
+]

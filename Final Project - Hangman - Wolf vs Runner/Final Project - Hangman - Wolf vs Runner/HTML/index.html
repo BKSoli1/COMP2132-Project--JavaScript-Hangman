@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hangman: Runner vs Wolf!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+    Main stylesheet (compiled from SCSS) 
+    -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <!-- 
+    Google fonts link   
+    -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <!-- 
+    jQuery link source for DOM manipulation
+     -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!--
+     Hangman Game JavaScript Logic
+     -->
+    <script src="../JavaScript/game.js" defer="defer"></script>
+</head>
+<body>
+    <main>
+        <!-- 
+      Centered Game Heading 
+      -->
+        <h1 class="main-heading">Hangman: Runner vs Wolf!</h1>
+        <section id="game-container">
+            <!-- 
+          Animated Scene: background, wolf, runner
+          -->
+            <div id="scene">
+                <img id="bg-image" src="../Images/forest.jpg" alt="Forest background">
+                <img id="wolf-image" src="../Images/wolf.gif" alt="Wolf">
+                <img id="hero-image" src="../Images/hero.gif" alt="Hero runner">
+            </div>
+            <!-- 
+            Guesses remaining counter 
+            -->
+            <div id="guess-remaining"></div>
+            <!-- 
+            Word and hint 
+            -->
+            <div id="word-container"></div>
+            <div id="hint-container"></div>
+            
+            <!--
+             On-screen keyboard (A–Z buttons)
+              -->
+            <div id="keyboard"></div>
+
+            <!--
+            Game status message (win/lose)
+             -->
+            <div id="message"></div>
+            
+            <!--
+             Restart Game button 
+             -->
+            <button id="reset-btn">Play Again</button>
+        </section>
+    </main>
+    <footer>
+</body>
+</html>
